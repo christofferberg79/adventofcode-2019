@@ -40,11 +40,11 @@ class Intcode(program: List<Long>) {
         if (isWaitingForInput) {
             input()
         } else {
-            processOpcode(pos.instruction % 100)
+            processOpcode()
         }
     }
 
-    private fun processOpcode(opcode: Long) = when (opcode) {
+    private fun processOpcode() = when (pos.opcode) {
         1L -> add()
         2L -> multiply()
         3L -> input()
@@ -55,7 +55,7 @@ class Intcode(program: List<Long>) {
         8L -> equals()
         9L -> adjustRelBase()
         99L -> halt()
-        else -> error("unknown opcode $opcode")
+        else -> error("unknown opcode ${pos.opcode}")
     }
 
     private fun add() {
@@ -124,6 +124,9 @@ private class Position(private val program: Intcode) {
     private var pos = 0L
     private var relBase = 0L
 
+    private val instruction get() = program[pos]
+    val opcode get() = instruction % 100
+
     operator fun get(offset: Int): Long {
         return program[position(offset)]
     }
@@ -151,8 +154,6 @@ private class Position(private val program: Intcode) {
     fun moveTo(pos: Long) {
         this.pos = pos
     }
-
-    val instruction get() = program[pos]
 }
 
 private fun Int.pow(n: Int) = generateSequence(1) { it * this }.elementAt(n)
