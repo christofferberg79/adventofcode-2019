@@ -4,23 +4,25 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 class Puzzle4 {
+    private val input = 245182..790572
+
     @Test
-    fun part1() {
-        assertEquals(1099, (245182..790572).count { value ->
-            with(value.digits) {
-                isSorted() && groupingBy { it }.eachCount().any { it.value >= 2 }
-            }
-        })
+    fun testPart1() {
+        assertEquals(1099, part1(input))
     }
 
     @Test
-    fun part2() {
-        assertEquals(710, (245182..790572).count { value ->
-            with(value.digits) {
-                isSorted() && groupingBy { it }.eachCount().any { it.value == 2 }
-            }
-        })
+    fun testPart2() {
+        assertEquals(710, part2(input))
     }
+}
+
+private fun part1(input: IntRange) = input.count { value ->
+    with(value.digits) { isSorted() && groupingBy { it }.eachCount().any { it.value >= 2 } }
+}
+
+private fun part2(input: IntRange) = input.count { value ->
+    with(value.digits) { isSorted() && groupingBy { it }.eachCount().any { it.value == 2 } }
 }
 
 private val Int.digits get() = toString().toCharArray().map { it.toInt() }

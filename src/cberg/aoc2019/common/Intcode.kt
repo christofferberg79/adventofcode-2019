@@ -8,10 +8,8 @@ class Intcode(program: List<Long>) {
     private val output = mutableListOf<Long>()
     private val pos = Position(this)
 
-    var isFinished = false
-        private set
-    var isWaitingForInput = false
-        private set
+    private var isFinished = false
+    private var isWaitingForInput = false
     val isRunning: Boolean get() = !(isFinished || isWaitingForInput && input.isEmpty())
 
     operator fun get(index: Long) = program[index] ?: 0
@@ -19,7 +17,7 @@ class Intcode(program: List<Long>) {
         program[index] = value
     }
 
-    fun toList() = List(program.keys.max()?.toInt()?.plus(1) ?: 0) { i -> get(i.toLong()) }
+    override fun toString() = (0..(program.keys.max() ?: -1)).map { get(it) }.joinToString(separator = ",")
 
     fun sendInput(value: Long) {
         input += value

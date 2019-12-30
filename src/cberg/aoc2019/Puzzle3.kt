@@ -8,67 +8,67 @@ import kotlin.test.assertEquals
 
 class Puzzle3 {
     @Test
-    fun part1() {
+    fun testPart1() {
         run {
             val input1 = "R8,U5,L5,D3"
             val input2 = "U7,R6,D4,L4"
-            val dist = getDistanceToClosestIntersection(input1, input2)
+            val dist = part1(input1, input2)
             assertEquals(6, dist)
         }
 
         run {
             val input1 = "R75,D30,R83,U83,L12,D49,R71,U7,L72"
             val input2 = "U62,R66,U55,R34,D71,R55,D58,R83"
-            val dist = getDistanceToClosestIntersection(input1, input2)
+            val dist = part1(input1, input2)
             assertEquals(159, dist)
         }
 
         run {
             val input1 = "R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51"
             val input2 = "U98,R91,D20,R16,D67,R40,U7,R15,U6,R7"
-            val dist = getDistanceToClosestIntersection(input1, input2)
+            val dist = part1(input1, input2)
             assertEquals(135, dist)
         }
 
         run {
             val (input1, input2) = readInputLines("input3.txt")
-            val dist = getDistanceToClosestIntersection(input1, input2)
+            val dist = part1(input1, input2)
             assertEquals(1285, dist)
         }
     }
 
     @Test
-    fun part2() {
+    fun testPart2() {
         run {
             val input1 = "R8,U5,L5,D3"
             val input2 = "U7,R6,D4,L4"
-            val steps = getFewestStepsToAnIntersection(input1, input2)
+            val steps = part2(input1, input2)
             assertEquals(30, steps)
         }
 
         run {
             val input1 = "R75,D30,R83,U83,L12,D49,R71,U7,L72"
             val input2 = "U62,R66,U55,R34,D71,R55,D58,R83"
-            val steps = getFewestStepsToAnIntersection(input1, input2)
+            val steps = part2(input1, input2)
             assertEquals(610, steps)
         }
 
         run {
             val input1 = "R98,U47,R26,D63,R33,U87,L62,D20,R33,U53,R51"
             val input2 = "U98,R91,D20,R16,D67,R40,U7,R15,U6,R7"
-            val steps = getFewestStepsToAnIntersection(input1, input2)
+            val steps = part2(input1, input2)
             assertEquals(410, steps)
         }
 
         run {
             val (input1, input2) = readInputLines("input3.txt")
-            val steps = getFewestStepsToAnIntersection(input1, input2)
+            val steps = part2(input1, input2)
             assertEquals(14228, steps)
         }
     }
 }
 
-private fun getDistanceToClosestIntersection(input1: String, input2: String): Int {
+private fun part1(input1: String, input2: String): Int {
     val lines1 = parseToLines(input1)
     val lines2 = parseToLines(input2)
 
@@ -85,7 +85,7 @@ private fun getDistanceToClosestIntersection(input1: String, input2: String): In
         .min() ?: error("No soultion found")
 }
 
-private fun getFewestStepsToAnIntersection(input1: String, input2: String): Int {
+private fun part2(input1: String, input2: String): Int {
     val lines1 = parseToLines(input1)
     val lines2 = parseToLines(input2)
 

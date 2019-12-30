@@ -21,7 +21,7 @@ class Puzzle13 {
         var score = 0L
         var ballX = 0L
         var paddleX = 0L
-        while (!ic.isFinished) {
+        while (ic.isRunning) {
             ic.run()
             val output = ic.receiveAllOutput()
             output.chunked(3).forEach { (x, y, z) ->
@@ -35,9 +35,7 @@ class Puzzle13 {
                     ballX = x
                 }
             }
-            if (ic.isWaitingForInput) {
-                ic.sendInput((ballX - paddleX).sign.toLong())
-            }
+            ic.sendInput((ballX - paddleX).sign.toLong())
         }
         assertEquals(19447, score)
     }

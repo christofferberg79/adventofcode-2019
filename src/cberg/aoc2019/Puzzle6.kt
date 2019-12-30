@@ -6,77 +6,78 @@ import kotlin.test.assertEquals
 
 class Puzzle6 {
     @Test
-    fun part1() {
-        val input = listOf(
-            "COM)B",
-            "B)C",
-            "C)D",
-            "D)E",
-            "E)F",
-            "B)G",
-            "G)H",
-            "D)I",
-            "E)J",
-            "J)K",
-            "K)L"
-        )
-        assertEquals(42, findNumberOfOrbits(input))
+    fun testPart1() {
+        run {
+            val input = listOf(
+                "COM)B",
+                "B)C",
+                "C)D",
+                "D)E",
+                "E)F",
+                "B)G",
+                "G)H",
+                "D)I",
+                "E)J",
+                "J)K",
+                "K)L"
+            )
+            assertEquals(42, part1(input))
+        }
 
-        assertEquals(122782, findNumberOfOrbits(readInputLines("input6.txt")))
+        run {
+            val input = readInputLines("input6.txt")
+            assertEquals(122782, part1(input))
+        }
     }
 
     @Test
-    fun part2() {
-        val input = listOf(
-            "COM)B",
-            "B)C",
-            "C)D",
-            "D)E",
-            "E)F",
-            "B)G",
-            "G)H",
-            "D)I",
-            "E)J",
-            "J)K",
-            "K)L",
-            "K)YOU",
-            "I)SAN"
-        )
-        assertEquals(4, findMinimalNumberOfTransfers(input))
-        assertEquals(271, findMinimalNumberOfTransfers(readInputLines("input6.txt")))
+    fun testPart2() {
+        run {
+            val input = listOf(
+                "COM)B",
+                "B)C",
+                "C)D",
+                "D)E",
+                "E)F",
+                "B)G",
+                "G)H",
+                "D)I",
+                "E)J",
+                "J)K",
+                "K)L",
+                "K)YOU",
+                "I)SAN"
+            )
+            assertEquals(4, part2(input))
+        }
+
+        run {
+            val input = readInputLines("input6.txt")
+            assertEquals(271, part2(input))
+        }
     }
 
 }
 
-private fun findNumberOfOrbits(input: List<String>): Int {
+private fun part1(input: List<String>): Int {
     val orbits = parseOrbits(input)
     val numbers = mutableMapOf("COM" to 0)
 
     fun getNumberOfOrbits(o: String): Int = numbers.getOrPut(o) {
-        orbits[o]?.let { getNumberOfOrbits(it) + 1 } ?: error(o)
+        orbits[o]?.let { getNumberOfOrbits(it) + 1 } ?: error("Unknown object: $o")
     }
 
     return orbits.keys.sumBy { getNumberOfOrbits(it) }
 }
 
-private fun parseOrbits(input: List<String>) =
-    input.map { it.split(")").let { it.last() to it.first() } }.toMap()
-
-private fun findMinimalNumberOfTransfers(input: List<String>): Int {
+private fun part2(input: List<String>): Int {
     val orbits = parseOrbits(input)
-    val youCounts = mutableMapOf<String, Int>()
-    var dest = orbits["YOU"]
-    while (dest != null) {
-        youCounts[dest] = youCounts.size
-        dest = orbits[dest]
-    }
-
-    dest = orbits["SAN"]
-    var sanCount = 0
-    while (dest != null) {
-        youCounts[dest]?.let { youCount -> return sanCount + youCount}
-        sanCount++
-        dest = orbits[dest]
-    }
-    error("No solution found")
+    val youOrbits = generateSequence("YOU") { orbits[it] }.drop(1).toSet()
+    val sanOrbits = generateSequence("SAN") { orbits[it] }.drop(1).toSet()
+    return (youOrbits - sanOrbits).size + (sanOrbits - youOrbits).size
 }
+
+private fun parseOrbits(input: List<String>) = input
+    .map { it.split(")") }
+    .map { (a, b) -> b to a }
+    .toMap()

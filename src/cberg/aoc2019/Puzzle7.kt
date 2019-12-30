@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 
 class Puzzle7 {
     @Test
-    fun part1() {
+    fun testPart1() {
         run {
             val signal = part1("3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0")
             assertEquals(43210, signal)
@@ -32,14 +32,8 @@ class Puzzle7 {
         }
     }
 
-    private fun part1(input: String): Long {
-        return getAllPhaseSettingSequences(0L..4L)
-            .map { getThrusterSignal(input, it) }
-            .max() ?: error("No solution found")
-    }
-
     @Test
-    fun part2() {
+    fun testPart2() {
         run {
             val signal = part2(
                 "3,26,1001,26,-4,26,3,27,1002,27,2,27,1,27,26,27,4,27,1001,28,-1,28,1005,28,6,99,0,0,5"
@@ -60,12 +54,18 @@ class Puzzle7 {
             assertEquals(4275738, signal)
         }
     }
+}
 
-    private fun part2(input: String): Long {
-        return getAllPhaseSettingSequences(5L..9L)
-            .map { getThrusterSignalWithFeedback(input, it) }
-            .max() ?: error("No solution found")
-    }
+private fun part1(input: String): Long {
+    return getAllPhaseSettingSequences(0L..4L)
+        .map { getThrusterSignal(input, it) }
+        .max() ?: error("No solution found")
+}
+
+private fun part2(input: String): Long {
+    return getAllPhaseSettingSequences(5L..9L)
+        .map { getThrusterSignalWithFeedback(input, it) }
+        .max() ?: error("No solution found")
 }
 
 private fun getAllPhaseSettingSequences(range: LongRange): List<List<Long>> {
@@ -90,9 +90,7 @@ private fun getThrusterSignal(program: String, phaseSettings: List<Long>): Long 
     var signal = 0L
     amps.forEach { amp ->
         amp.sendInput(signal)
-        while (!amp.hasOutput()) {
-            amp.step()
-        }
+        amp.run()
         signal = amp.receiveOutput()
     }
     return signal
@@ -103,16 +101,16 @@ private fun getThrusterSignalWithFeedback(program: String, phaseSettings: List<L
     val amps = phaseSettings.map { Intcode(program).apply { sendInput(it) } }
     amps.first().sendInput(0)
 
-    var signal = 0L
+    var lastSignal = 0L
     while (amps.any { it.isRunning }) {
         amps.forEachIndexed { index, amp ->
-            amp.step()
-            if (amp.hasOutput()) {
-                signal = amp.receiveOutput()
+            amp.run()
+            amp.receiveAllOutput().forEach { output ->
                 val nextAmp = amps[(index + 1) % amps.size]
-                nextAmp.sendInput(signal)
+                nextAmp.sendInput(output)
+                lastSignal = output
             }
         }
     }
-    return signal
+    return lastSignal
 }

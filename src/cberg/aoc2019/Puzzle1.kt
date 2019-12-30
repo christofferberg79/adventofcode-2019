@@ -1,31 +1,31 @@
 package cberg.aoc2019
 
-import org.junit.Test
 import cberg.aoc2019.common.readInputLines
+import org.junit.Test
 import kotlin.test.assertEquals
 
 class Puzzle1 {
     @Test
-    fun part1() {
-        assertEquals(2, listOf(12).sumFuel())
-        assertEquals(2, listOf(14).sumFuel())
-        assertEquals(654, listOf(1969).sumFuel())
-        assertEquals(33583, listOf(100756).sumFuel())
-        assertEquals(3263320, getMassesFromInputFile().sumFuel())
+    fun testPart1() {
+        assertEquals(2, part1(listOf(12)))
+        assertEquals(2, part1(listOf(14)))
+        assertEquals(654, part1(listOf(1969)))
+        assertEquals(33583, part1(listOf(100756)))
+        assertEquals(3263320, part1(getMassesFromInputFile()))
     }
 
     @Test
-    fun part2() {
-        assertEquals(2, listOf(14).sumFuel2())
-        assertEquals(966, listOf(1969).sumFuel2())
-        assertEquals(50346, listOf(100756).sumFuel2())
-        assertEquals(4892135, getMassesFromInputFile().sumFuel2())
+    fun testPart2() {
+        assertEquals(2, part2(listOf(14)))
+        assertEquals(966, part2(listOf(1969)))
+        assertEquals(50346, part2(listOf(100756)))
+        assertEquals(4892135, part2(getMassesFromInputFile()))
     }
 }
 
-private fun List<Int>.sumFuel() = sumBy { mass -> mass / 3 - 2 }
+private fun part1(input: List<Int>) = input.sumBy { mass -> mass / 3 - 2 }
 
-private fun List<Int>.sumFuel2() = sumBy { mass ->
+private fun part2(input: List<Int>) = input.sumBy { mass ->
     generateSequence(mass) { additionalMass -> additionalMass / 3 - 2 }
         .drop(1)
         .takeWhile { fuel -> fuel > 0 }
