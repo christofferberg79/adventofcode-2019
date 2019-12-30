@@ -24,11 +24,7 @@ class Intcode(program: List<Long>) {
     }
 
     fun receiveOutput() = generateSequence {
-        if (output.isNotEmpty()) {
-            output.removeAt(0)
-        } else {
-            null
-        }
+        output.firstOrNull()?.also { output.removeAt(0) }
     }
 
     fun run() {
