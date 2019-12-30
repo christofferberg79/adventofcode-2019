@@ -44,8 +44,9 @@ private class Droid(program: String) {
         buildMap()
         pos = map.filterValues { it.status == O2_SYS }.keys.single()
         map[pos] = Location(O2_SYS)
-        map.filterValues { it.status == EMPTY }.forEach { (pos, loc) -> map[pos] =
-            Location(loc.status, Int.MAX_VALUE)
+        map.filterValues { it.status == EMPTY }.forEach { (pos, loc) ->
+            map[pos] =
+                Location(loc.status, Int.MAX_VALUE)
         }
         buildMap()
 
@@ -86,41 +87,11 @@ private class Droid(program: String) {
         }
     }
 
-    private fun drawMap() {
-        val o2SysPos = map.filterValues { it.status == O2_SYS }.keys.single()
-        val pathToO2Sys = generateSequence(o2SysPos) { map[it]?.back?.plus(it) }.toSet()
-
-        val minX = map.keys.map { it.x }.min() ?: 0
-        val maxX = map.keys.map { it.x }.max() ?: 0
-        val minY = map.keys.map { it.y }.min() ?: 0
-        val maxY = map.keys.map { it.y }.max() ?: 0
-        for (y in minY..maxY) {
-            for (x in minX..maxX) {
-                val c = when (val drawPos = Coordinate(x, y)) {
-                    o2SysPos -> "X"
-                    pos -> "D"
-                    in pathToO2Sys -> "."
-                    else -> when (map[drawPos]?.status) {
-                        null -> " "
-                        EMPTY -> " "
-                        WALL -> "#"
-                        O2_SYS -> "X"
-                    }
-                }
-                print(c)
-            }
-            println()
-        }
-    }
-
     private fun move(dir: Coordinate): Status {
         ic.sendInput(dir.toInput())
-        while (!ic.hasOutput()) {
-            ic.step()
-        }
+        ic.run()
         return ic.receiveOutput().toStatus()
     }
-
 
     private fun Coordinate.toInput() = when (this) {
         up -> 1L
