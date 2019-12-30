@@ -24,8 +24,7 @@ class Intcode(program: List<Long>) {
     }
 
     fun receiveOutput() = output.removeAt(0)
-    fun receiveOutputOrNull() = if (hasOutput()) receiveOutput() else null
-    fun hasOutput() = output.isNotEmpty()
+    fun receiveOutputOrNull() = if (output.isNotEmpty()) receiveOutput() else null
     fun receiveAllOutput() = generateSequence { receiveOutputOrNull() }
 
     fun run() {
