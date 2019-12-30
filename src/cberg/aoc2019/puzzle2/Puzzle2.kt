@@ -1,7 +1,7 @@
 package cberg.aoc2019.puzzle2
 
-import cberg.aoc2019.intcode.Intcode
-import cberg.aoc2019.readInput
+import cberg.aoc2019.common.Intcode
+import cberg.aoc2019.common.readInput
 import org.junit.Test
 import kotlin.test.assertEquals
 

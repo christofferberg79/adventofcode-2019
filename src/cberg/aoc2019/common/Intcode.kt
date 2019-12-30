@@ -1,4 +1,4 @@
-package cberg.aoc2019.intcode
+package cberg.aoc2019.common
 
 class Intcode(program: List<Long>) {
     constructor(program: String) : this(parseProgram(program))

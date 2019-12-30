@@ -1,6 +1,6 @@
 package cberg.aoc2019.puzzle16
 
-import cberg.aoc2019.readInput
+import cberg.aoc2019.common.readInput
 import org.junit.Test
 import kotlin.math.abs
 import kotlin.test.assertEquals
@@ -19,7 +19,7 @@ class Puzzle16 {
     fun testPart2() {
         assertEquals("84462026", part2("03036732577212944063491565474664", 100))
         assertEquals("78725270", part2("02935109699940807407585447034323", 100))
-        assertEquals("53553731w", part2("03081770884921959731165446850517", 100))
+        assertEquals("53553731", part2("03081770884921959731165446850517", 100))
         assertEquals("87766336", part2(readInput("input16.txt"), 100))
     }
 }

@@ -1,15 +1,15 @@
 package cberg.aoc2019.puzzle15
 
-import cberg.aoc2019.coordinate.Coordinate
-import cberg.aoc2019.coordinate.Coordinate.Companion.down
-import cberg.aoc2019.coordinate.Coordinate.Companion.left
-import cberg.aoc2019.coordinate.Coordinate.Companion.right
-import cberg.aoc2019.coordinate.Coordinate.Companion.up
-import cberg.aoc2019.coordinate.plus
-import cberg.aoc2019.coordinate.unaryMinus
-import cberg.aoc2019.intcode.Intcode
+import cberg.aoc2019.common.Coordinate
+import cberg.aoc2019.common.Coordinate.Companion.down
+import cberg.aoc2019.common.Coordinate.Companion.left
+import cberg.aoc2019.common.Coordinate.Companion.right
+import cberg.aoc2019.common.Coordinate.Companion.up
+import cberg.aoc2019.common.plus
+import cberg.aoc2019.common.unaryMinus
+import cberg.aoc2019.common.Intcode
 import cberg.aoc2019.puzzle15.Status.*
-import cberg.aoc2019.readInput
+import cberg.aoc2019.common.readInput
 import org.junit.Test
 import kotlin.test.assertEquals
 

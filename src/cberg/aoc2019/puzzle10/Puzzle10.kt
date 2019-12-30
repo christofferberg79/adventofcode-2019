@@ -1,10 +1,10 @@
 package cberg.aoc2019.puzzle10
 
-import cberg.aoc2019.coordinate.Coordinate
-import cberg.aoc2019.coordinate.manhattanDistance
-import cberg.aoc2019.coordinate.minus
-import cberg.aoc2019.coordinate.quadrant
-import cberg.aoc2019.readInputLines
+import cberg.aoc2019.common.Coordinate
+import cberg.aoc2019.common.manhattanDistance
+import cberg.aoc2019.common.minus
+import cberg.aoc2019.common.quadrant
+import cberg.aoc2019.common.readInputLines
 import org.junit.Test
 import kotlin.test.assertEquals
 

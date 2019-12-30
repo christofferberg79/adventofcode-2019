@@ -1,12 +1,12 @@
 package cberg.aoc2019.puzzle11
 
-import cberg.aoc2019.coordinate.Coordinate
-import cberg.aoc2019.coordinate.Coordinate.Companion.up
-import cberg.aoc2019.coordinate.plus
-import cberg.aoc2019.coordinate.turnLeft
-import cberg.aoc2019.coordinate.turnRight
-import cberg.aoc2019.intcode.Intcode
-import cberg.aoc2019.readInput
+import cberg.aoc2019.common.Coordinate
+import cberg.aoc2019.common.Coordinate.Companion.up
+import cberg.aoc2019.common.plus
+import cberg.aoc2019.common.turnLeft
+import cberg.aoc2019.common.turnRight
+import cberg.aoc2019.common.Intcode
+import cberg.aoc2019.common.readInput
 import org.junit.Test
 import kotlin.test.assertEquals
 

@@ -1,4 +1,4 @@
-package cberg.aoc2019
+package cberg.aoc2019.common
 
 import java.io.File
 

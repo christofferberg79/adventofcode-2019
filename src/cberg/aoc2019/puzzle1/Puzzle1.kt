@@ -1,7 +1,7 @@
 package cberg.aoc2019.puzzle1
 
 import org.junit.Test
-import cberg.aoc2019.readInputLines
+import cberg.aoc2019.common.readInputLines
 import kotlin.test.assertEquals
 
 class Puzzle1 {

@@ -1,6 +1,6 @@
 package cberg.aoc2019.puzzle6
 
-import cberg.aoc2019.readInputLines
+import cberg.aoc2019.common.readInputLines
 import org.junit.Test
 import kotlin.test.assertEquals
 

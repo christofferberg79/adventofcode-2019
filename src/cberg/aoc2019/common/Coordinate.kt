@@ -1,4 +1,4 @@
-package cberg.aoc2019.coordinate
+package cberg.aoc2019.common
 
 import kotlin.math.abs
 
