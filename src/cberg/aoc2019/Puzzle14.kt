@@ -153,27 +153,18 @@ class Puzzle14 {
 
 private fun part1(input: List<String>): Long {
     val reactions = parseReactions(input)
-    return getOresNeeded(
-        reactions,
-        Chemical(1, "FUEL")
-    )
+    return getOresNeeded(reactions, Chemical(1, "FUEL"))
 }
 
 private fun part2(input: List<String>): Long {
     val reactions = parseReactions(input)
     val ores = 1000000000000
 
-    var low = ores / getOresNeeded(
-        reactions,
-        Chemical(1, "FUEL")
-    )
+    var low = ores / getOresNeeded(reactions, Chemical(1, "FUEL"))
     var high = 2 * ores - low
     while (low + 1 < high) {
         val middle = (high + low) / 2
-        if (getOresNeeded(
-                reactions,
-                Chemical(middle, "FUEL")
-            ) >= ores) {
+        if (getOresNeeded(reactions, Chemical(middle, "FUEL")) >= ores) {
             high = middle
         } else {
             low = middle
@@ -220,10 +211,7 @@ private fun parseReactions(input: List<String>) =
 private data class Chemical(val amount: Long, val name: String)
 
 private fun String.toChemical() = split(" ").let { (amount, name) ->
-    Chemical(
-        amount.toLong(),
-        name
-    )
+    Chemical(amount.toLong(), name)
 }
 
 private class Reaction(val ingredients: List<Chemical>, val result: Chemical)
