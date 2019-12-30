@@ -26,5 +26,5 @@ private fun run(input: Long): List<Long> {
     val computer = Intcode(readInput("input5.txt"))
     computer.sendInput(input)
     computer.run()
-    return computer.receiveAllOutput()
+    return computer.receiveAllOutput().toList()
 }

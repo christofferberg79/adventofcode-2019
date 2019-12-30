@@ -98,9 +98,9 @@ private fun getThrusterSignal(program: String, phaseSettings: List<Long>): Long 
     return signal
 }
 
+
 private fun getThrusterSignalWithFeedback(program: String, phaseSettings: List<Long>): Long {
     val amps = phaseSettings.map { Intcode(program).apply { sendInput(it) } }
-    val next = amps.drop(1) + amps.first()
     amps.first().sendInput(0)
 
     var signal = 0L
@@ -109,7 +109,8 @@ private fun getThrusterSignalWithFeedback(program: String, phaseSettings: List<L
             amp.step()
             if (amp.hasOutput()) {
                 signal = amp.receiveOutput()
-                next[index].sendInput(signal)
+                val nextAmp = amps[(index + 1) % amps.size]
+                nextAmp.sendInput(signal)
             }
         }
     }

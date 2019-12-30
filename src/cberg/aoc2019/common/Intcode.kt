@@ -6,12 +6,12 @@ class Intcode(program: List<Long>) {
     private val program = program.mapIndexed { index, value -> index.toLong() to value }.toMap(mutableMapOf())
     private val input = mutableListOf<Long>()
     private val output = mutableListOf<Long>()
+    private val pos = Position(this)
+
     var isFinished = false
         private set
     var isWaitingForInput = false
         private set
-    private val pos = Position(this)
-
     val isRunning: Boolean get() = !(isFinished || isWaitingForInput && input.isEmpty())
 
     operator fun get(index: Long) = program[index] ?: 0
@@ -28,7 +28,7 @@ class Intcode(program: List<Long>) {
     fun receiveOutput() = output.removeAt(0)
     fun receiveOutputOrNull() = if (hasOutput()) receiveOutput() else null
     fun hasOutput() = output.isNotEmpty()
-    fun receiveAllOutput(): List<Long> = output
+    fun receiveAllOutput() = generateSequence { receiveOutputOrNull() }
 
     fun run() {
         while (isRunning) {
