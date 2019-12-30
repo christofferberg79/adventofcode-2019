@@ -1,4 +1,4 @@
-package cberg.aoc2019.puzzle4
+package cberg.aoc2019
 
 import org.junit.Test
 import kotlin.test.assertEquals

@@ -1,4 +1,4 @@
-package cberg.aoc2019.puzzle15
+package cberg.aoc2019
 
 import cberg.aoc2019.common.Coordinate
 import cberg.aoc2019.common.Coordinate.Companion.down
@@ -8,7 +8,7 @@ import cberg.aoc2019.common.Coordinate.Companion.up
 import cberg.aoc2019.common.plus
 import cberg.aoc2019.common.unaryMinus
 import cberg.aoc2019.common.Intcode
-import cberg.aoc2019.puzzle15.Status.*
+import cberg.aoc2019.Status.*
 import cberg.aoc2019.common.readInput
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -44,7 +44,9 @@ private class Droid(program: String) {
         buildMap()
         pos = map.filterValues { it.status == O2_SYS }.keys.single()
         map[pos] = Location(O2_SYS)
-        map.filterValues { it.status == EMPTY }.forEach { (pos, loc) -> map[pos] = Location(loc.status, Int.MAX_VALUE) }
+        map.filterValues { it.status == EMPTY }.forEach { (pos, loc) -> map[pos] =
+            Location(loc.status, Int.MAX_VALUE)
+        }
         buildMap()
 
         return map.values.filter { it.status == EMPTY }.map { it.stepsFromStart }.max() ?: error("No solution found")

@@ -1,4 +1,4 @@
-package cberg.aoc2019.puzzle16
+package cberg.aoc2019
 
 import cberg.aoc2019.common.readInput
 import org.junit.Test

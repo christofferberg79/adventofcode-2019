@@ -1,4 +1,4 @@
-package cberg.aoc2019.puzzle11
+package cberg.aoc2019
 
 import cberg.aoc2019.common.Coordinate
 import cberg.aoc2019.common.Coordinate.Companion.up

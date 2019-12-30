@@ -1,4 +1,4 @@
-package cberg.aoc2019.puzzle2
+package cberg.aoc2019
 
 import cberg.aoc2019.common.Intcode
 import cberg.aoc2019.common.readInput
@@ -12,7 +12,9 @@ class Puzzle2 {
         assertEquals("2,3,0,6,99", runProgram("2,3,0,3,99"))
         assertEquals("2,4,4,5,99,9801", runProgram("2,4,4,5,99,0"))
         assertEquals("30,1,1,4,2,5,6,0,99", runProgram("1,1,1,4,99,5,6,0,99"))
-        assertEquals("3500,9,10,70,2,3,11,0,99,30,40,50", runProgram("1,9,10,3,2,3,11,0,99,30,40,50"))
+        assertEquals("3500,9,10,70,2,3,11,0,99,30,40,50",
+            runProgram("1,9,10,3,2,3,11,0,99,30,40,50")
+        )
 
         val input = readInput("input2.txt")
         val result = execute(input, 12L, 2L)[0]

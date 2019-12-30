@@ -1,4 +1,4 @@
-package cberg.aoc2019.puzzle1
+package cberg.aoc2019
 
 import org.junit.Test
 import cberg.aoc2019.common.readInputLines

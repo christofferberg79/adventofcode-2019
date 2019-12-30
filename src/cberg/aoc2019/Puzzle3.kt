@@ -1,4 +1,4 @@
-package cberg.aoc2019.puzzle3
+package cberg.aoc2019
 
 import cberg.aoc2019.common.readInputLines
 import org.junit.Test
@@ -73,7 +73,12 @@ private fun getDistanceToClosestIntersection(input1: String, input2: String): In
     val lines1 = parseToLines(input1)
     val lines2 = parseToLines(input2)
 
-    return lines1.flatMap { line1 -> lines2.map { line2 -> intersectionOf(line1, line2) } }
+    return lines1.flatMap { line1 -> lines2.map { line2 ->
+        intersectionOf(
+            line1,
+            line2
+        )
+    } }
         .filterNotNull()
         .map { it.manhattanDistance }
         .min() ?: error("No soultion found")
@@ -111,8 +116,10 @@ private fun parseToLines(input: String): List<Line> {
 
 private data class Vector(val x: Int, val y: Int)
 
-private operator fun Vector.plus(other: Vector) = Vector(x + other.x, y + other.y)
-private operator fun Vector.minus(other: Vector) = Vector(x - other.x, y - other.y)
+private operator fun Vector.plus(other: Vector) =
+    Vector(x + other.x, y + other.y)
+private operator fun Vector.minus(other: Vector) =
+    Vector(x - other.x, y - other.y)
 private val Vector.manhattanDistance get() = abs(x) + abs(y)
 
 private fun parseDir(s: String): Vector {

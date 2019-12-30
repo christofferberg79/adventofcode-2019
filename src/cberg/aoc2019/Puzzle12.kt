@@ -1,4 +1,4 @@
-package cberg.aoc2019.puzzle12
+package cberg.aoc2019
 
 import cberg.aoc2019.common.readInputLines
 import org.junit.Test
@@ -153,7 +153,8 @@ private fun applyVelocity(moons: List<Moon>) = moons.forEach { it.position += it
 private data class Vec3(val x: Int, val y: Int, val z: Int)
 
 private val Vec3.manhattanDistance get() = abs(x) + abs(y) + abs(z)
-private operator fun Vec3.plus(other: Vec3) = Vec3(x + other.x, y + other.y, z + other.z)
+private operator fun Vec3.plus(other: Vec3) =
+    Vec3(x + other.x, y + other.y, z + other.z)
 
 private fun parseInput(input: List<String>) = input
     .map {
@@ -162,7 +163,9 @@ private fun parseInput(input: List<String>) = input
     }
 
 private data class Moon(var position: Vec3, var velocity: Vec3) {
-    constructor(position: Vec3) : this(position, Vec3(0, 0, 0))
+    constructor(position: Vec3) : this(position,
+        Vec3(0, 0, 0)
+    )
 }
 
 private val Moon.energy get() = position.manhattanDistance * velocity.manhattanDistance
