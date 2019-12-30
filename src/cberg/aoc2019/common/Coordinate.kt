@@ -25,19 +25,5 @@ val Coordinate.quadrant
         else -> error("$this is in no quadrant")
     }
 
-
-fun Coordinate.turnLeft() = when (this) {
-    Coordinate.up -> Coordinate.left
-    Coordinate.left -> Coordinate.down
-    Coordinate.down -> Coordinate.right
-    Coordinate.right -> Coordinate.up
-    else -> error("Invalid direction: $this")
-}
-
-fun Coordinate.turnRight() = when (this) {
-    Coordinate.up -> Coordinate.right
-    Coordinate.left -> Coordinate.up
-    Coordinate.down -> Coordinate.left
-    Coordinate.right -> Coordinate.down
-    else -> error("Invalid direction: $this")
-}
+fun Coordinate.turnLeft() = Coordinate(y, -x)
+fun Coordinate.turnRight() = Coordinate(-y, x)
