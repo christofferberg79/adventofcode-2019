@@ -29,9 +29,7 @@ private fun part1(input: String, phases: Int): String {
 }
 
 private fun part2(input: String, phases: Int): String {
-    val fft2 = fft2(input, phases)
-    val take = fft2.take(8)
-    return take.joinToString(separator = "")
+    return fft2(input, phases).take(8).joinToString(separator = "")
 }
 
 private fun fft(input: String, phases: Int): List<Int> {
