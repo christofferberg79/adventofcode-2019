@@ -26,5 +26,5 @@ private fun run(input: Long, program: String): List<Long> {
     val computer = Intcode(program)
     computer.sendInput(input)
     computer.run()
-    return computer.receiveAllOutput().toList()
+    return computer.receiveOutput().toList()
 }

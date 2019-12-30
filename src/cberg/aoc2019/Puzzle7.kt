@@ -91,7 +91,7 @@ private fun getThrusterSignal(program: String, phaseSettings: List<Long>): Long 
     amps.forEach { amp ->
         amp.sendInput(signal)
         amp.run()
-        signal = amp.receiveOutput()
+        signal = amp.receiveOutput().first()
     }
     return signal
 }
@@ -105,7 +105,7 @@ private fun getThrusterSignalWithFeedback(program: String, phaseSettings: List<L
     while (amps.any { it.isRunning }) {
         amps.forEachIndexed { index, amp ->
             amp.run()
-            amp.receiveAllOutput().forEach { output ->
+            amp.receiveOutput().forEach { output ->
                 val nextAmp = amps[(index + 1) % amps.size]
                 nextAmp.sendInput(output)
                 lastSignal = output

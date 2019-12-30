@@ -90,7 +90,7 @@ private class Droid(program: String) {
     private fun move(dir: Coordinate): Status {
         ic.sendInput(dir.toInput())
         ic.run()
-        return ic.receiveOutput().toStatus()
+        return ic.receiveOutput().first().toStatus()
     }
 
     private fun Coordinate.toInput() = when (this) {

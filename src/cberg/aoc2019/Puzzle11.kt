@@ -69,7 +69,7 @@ private fun paint(grid: MutableMap<Coordinate, Long>, program: String) {
 
     while (ic.isRunning) {
         ic.run()
-        ic.receiveAllOutput().forEach { outputValue ->
+        ic.receiveOutput().forEach { outputValue ->
             if (painting) {
                 grid[pos] = outputValue
             } else {

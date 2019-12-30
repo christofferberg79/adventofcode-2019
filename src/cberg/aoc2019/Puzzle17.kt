@@ -5,8 +5,8 @@ import cberg.aoc2019.common.Coordinate.Companion.down
 import cberg.aoc2019.common.Coordinate.Companion.left
 import cberg.aoc2019.common.Coordinate.Companion.right
 import cberg.aoc2019.common.Coordinate.Companion.up
-import cberg.aoc2019.common.plus
 import cberg.aoc2019.common.Intcode
+import cberg.aoc2019.common.plus
 import cberg.aoc2019.common.readInput
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -14,30 +14,31 @@ import kotlin.test.assertEquals
 class Puzzle17 {
     @Test
     fun testPart1() {
-        assertEquals(9876, part1())
+        val input = readInput("input17.txt")
+        assertEquals(9876, part1(input))
     }
 
     @Test
     fun testPart2() {
-        assertEquals(1234055, part2())
+        val input = readInput("input17.txt")
+        assertEquals(1234055, part2(input))
     }
 }
 
-private fun part1(): Int {
-    val program = readInput("input17.txt")
+private fun part1(program: String): Int {
     val ic = Intcode(program)
     var x = 0
     var y = 0
     val map = mutableMapOf<Coordinate, Char>()
-    while (ic.isRunning) {
-        ic.step()
-        ic.receiveOutputOrNull()?.let { output ->
-            if (output == 10L) {
-                x = 0
-                y++
-            } else {
-                map[Coordinate(x++, y)] = output.toChar()
-            }
+
+    ic.run()
+    ic.receiveOutput().forEach { output ->
+        if (output == 10L) {
+            x = 0
+            y++
+        } else {
+            map[Coordinate(x, y)] = output.toChar()
+            x++
         }
     }
 
@@ -45,23 +46,21 @@ private fun part1(): Int {
         .map { (x, y) -> x * y }.sum()
 }
 
-private fun part2(): Int {
+private fun part2(program: String): Int {
+    val input = "A,B,A,C,B,C,B,A,C,B\n" +
+            "L,10,L,6,R,10\n" +
+            "R,6,R,8,R,8,L,6,R,8\n" +
+            "L,10,R,8,R,8,L,10\n" +
+            "n\n"
 
-    val input = listOf(
-        "A,B,A,C,B,C,B,A,C,B\n",
-        "L,10,L,6,R,10\n",
-        "R,6,R,8,R,8,L,6,R,8\n",
-        "L,10,R,8,R,8,L,10\n",
-        "n\n"
-    )
-
-    val program = readInput("input17.txt")
     val ic = Intcode(program)
     ic[0] = 2
 
-    input.forEach { it.forEach { ic.sendInput(it.toLong()) } }
+    input.forEach {
+        ic.sendInput(it.toLong())
+    }
 
     ic.run()
 
-    return ic.receiveAllOutput().last().toInt()
+    return ic.receiveOutput().last().toInt()
 }

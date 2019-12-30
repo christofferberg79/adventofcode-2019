@@ -23,21 +23,21 @@ class Intcode(program: List<Long>) {
         input += value
     }
 
-    fun receiveOutput() = output.removeAt(0)
-    fun receiveOutputOrNull() = if (output.isNotEmpty()) receiveOutput() else null
-    fun receiveAllOutput() = generateSequence { receiveOutputOrNull() }
-
-    fun run() {
-        while (isRunning) {
-            step()
+    fun receiveOutput() = generateSequence {
+        if (output.isNotEmpty()) {
+            output.removeAt(0)
+        } else {
+            null
         }
     }
 
-    fun step() {
-        if (isWaitingForInput) {
-            input()
-        } else {
-            processOpcode()
+    fun run() {
+        while (isRunning) {
+            if (isWaitingForInput) {
+                input()
+            } else {
+                processOpcode()
+            }
         }
     }
 

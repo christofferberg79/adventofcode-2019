@@ -25,7 +25,7 @@ class Puzzle13 {
 private fun part1(input: String): Int {
     val ic = Intcode(input)
     ic.run()
-    return ic.receiveAllOutput().chunked(3).count { it.last() == 2L }
+    return ic.receiveOutput().chunked(3).count { it.last() == 2L }
 }
 
 private fun part2(input: String): Long {
@@ -36,7 +36,7 @@ private fun part2(input: String): Long {
     var paddleX = 0L
     while (ic.isRunning) {
         ic.run()
-        ic.receiveAllOutput().chunked(3).forEach { (x, y, z) ->
+        ic.receiveOutput().chunked(3).forEach { (x, y, z) ->
             when {
                 x == -1L && y == 0L -> score = z
                 z == 3L -> paddleX = x

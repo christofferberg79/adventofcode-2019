@@ -33,5 +33,5 @@ private fun execute(program: String, vararg input: Long): String {
     val amp = Intcode(program)
     input.forEach(amp::sendInput)
     amp.run()
-    return amp.receiveAllOutput().joinToString(separator = ",")
+    return amp.receiveOutput().joinToString(separator = ",")
 }
