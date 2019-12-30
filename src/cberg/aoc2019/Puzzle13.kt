@@ -9,34 +9,41 @@ import kotlin.test.assertEquals
 class Puzzle13 {
     @Test
     fun testPart1() {
-        val ic = Intcode(readInput("input13.txt"))
-        ic.run()
-        assertEquals(398, ic.receiveAllOutput().chunked(3).count { it.last() == 2L })
+        val input = readInput("input13.txt")
+        val result = part1(input)
+        assertEquals(398, result)
     }
 
     @Test
     fun testPart2() {
-        val ic = Intcode(readInput("input13.txt"))
-        ic[0] = 2
-        var score = 0L
-        var ballX = 0L
-        var paddleX = 0L
-        while (ic.isRunning) {
-            ic.run()
-            val output = ic.receiveAllOutput()
-            output.chunked(3).forEach { (x, y, z) ->
-                if (x == -1L && y == 0L) {
-                    score = z
-                }
-                if (z == 3L) {
-                    paddleX = x
-                }
-                if (z == 4L) {
-                    ballX = x
-                }
-            }
-            ic.sendInput((ballX - paddleX).sign.toLong())
-        }
-        assertEquals(19447, score)
+        val input = readInput("input13.txt")
+        val result = part2(input)
+        assertEquals(19447, result)
     }
+}
+
+private fun part1(input: String): Int {
+    val ic = Intcode(input)
+    ic.run()
+    return ic.receiveAllOutput().chunked(3).count { it.last() == 2L }
+}
+
+private fun part2(input: String): Long {
+    val ic = Intcode(input)
+    ic[0] = 2
+    var score = 0L
+    var ballX = 0L
+    var paddleX = 0L
+    while (ic.isRunning) {
+        ic.run()
+        ic.receiveAllOutput().chunked(3).forEach { (x, y, z) ->
+            when {
+                x == -1L && y == 0L -> score = z
+                z == 3L -> paddleX = x
+                z == 4L -> ballX = x
+            }
+        }
+        ic.sendInput((ballX - paddleX).sign.toLong())
+    }
+    return score
 }
