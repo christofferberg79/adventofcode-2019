@@ -1,8 +1,7 @@
 package cberg.aoc2019
 
-import cberg.aoc2019.common.readInputLines
+import cberg.aoc2019.common.*
 import org.junit.Test
-import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.test.assertEquals
@@ -73,12 +72,14 @@ private fun getDistanceToClosestIntersection(input1: String, input2: String): In
     val lines1 = parseToLines(input1)
     val lines2 = parseToLines(input2)
 
-    return lines1.flatMap { line1 -> lines2.map { line2 ->
-        intersectionOf(
-            line1,
-            line2
-        )
-    } }
+    return lines1.flatMap { line1 ->
+        lines2.map { line2 ->
+            intersectionOf(
+                line1,
+                line2
+            )
+        }
+    }
         .filterNotNull()
         .map { it.manhattanDistance }
         .min() ?: error("No soultion found")
@@ -107,38 +108,30 @@ private fun getFewestStepsToAnIntersection(input1: String, input2: String): Int 
 }
 
 private fun parseToLines(input: String): List<Line> {
-    var pos = Vector(0, 0)
+    var pos = Coordinate(0, 0)
     return input
         .split(",")
         .map { parseDir(it) }
         .map { dir -> Line(pos, dir).also { line -> pos = line.end } }
 }
 
-private data class Vector(val x: Int, val y: Int)
-
-private operator fun Vector.plus(other: Vector) =
-    Vector(x + other.x, y + other.y)
-private operator fun Vector.minus(other: Vector) =
-    Vector(x - other.x, y - other.y)
-private val Vector.manhattanDistance get() = abs(x) + abs(y)
-
-private fun parseDir(s: String): Vector {
+private fun parseDir(s: String): Coordinate {
     val dir = s.first()
     val dist = s.drop(1).toInt()
     return when (dir) {
-        'U' -> Vector(0, -dist)
-        'D' -> Vector(0, dist)
-        'R' -> Vector(dist, 0)
-        'L' -> Vector(-dist, 0)
+        'U' -> Coordinate(0, -dist)
+        'D' -> Coordinate(0, dist)
+        'R' -> Coordinate(dist, 0)
+        'L' -> Coordinate(-dist, 0)
         else -> error("Invalid direction $dir")
     }
 }
 
-private data class Line(val start: Vector, val dir: Vector)
+private data class Line(val start: Coordinate, val dir: Coordinate)
 
 private val Line.end get() = start + dir
 
-private fun intersectionOf(line1: Line, line2: Line): Vector? {
+private fun intersectionOf(line1: Line, line2: Line): Coordinate? {
     fun Int.isBetween(i1: Int, i2: Int) = this in min(i1, i2)..max(i1, i2)
 
     if (line1.start == line2.start) {
@@ -148,13 +141,13 @@ private fun intersectionOf(line1: Line, line2: Line): Vector? {
         if (line1.start.x.isBetween(line2.start.x, line2.end.x) &&
             line2.start.y.isBetween(line1.start.y, line1.end.y)
         ) {
-            return Vector(line1.start.x, line2.start.y)
+            return Coordinate(line1.start.x, line2.start.y)
         }
     } else if (line1.dir.y == 0 && line2.dir.x == 0) {
         if (line1.start.y.isBetween(line2.start.y, line2.end.y) &&
             line2.start.x.isBetween(line1.start.x, line1.end.x)
         ) {
-            return Vector(line2.start.x, line1.start.y)
+            return Coordinate(line2.start.x, line1.start.y)
         }
     }
     return null
