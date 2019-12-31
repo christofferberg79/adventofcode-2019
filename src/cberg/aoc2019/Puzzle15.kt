@@ -45,8 +45,7 @@ private class Droid(program: String) {
         pos = map.filterValues { it.status == O2_SYS }.keys.single()
         map[pos] = Location(O2_SYS)
         map.filterValues { it.status == EMPTY }.forEach { (pos, loc) ->
-            map[pos] =
-                Location(loc.status, Int.MAX_VALUE)
+            map[pos] = Location(loc.status, Int.MAX_VALUE)
         }
         buildMap()
 
