@@ -164,7 +164,7 @@ class AsciiComputer(program: String, private val printOutput: Boolean = false) {
     }
 
     fun sendInput(input: String) {
-        writeOutputLine(input)
+        writeOutputLine(input.replace("\n", "\n> "))
         "$input\n".forEach { ic.sendInput(it.toLong()) }
         run()
     }
