@@ -8,9 +8,9 @@ class Intcode(program: List<Long>) {
     private val output = mutableListOf<Long>()
     private val pos = Position(this)
 
-    private var isFinished = false
-    var isWaitingForInput = false
-    val isRunning: Boolean get() = !(isFinished || isWaitingForInput && input.isEmpty())
+    private var isWaitingForInput = false
+    var isRunning = true
+        private set
 
     operator fun get(index: Long) = program[index] ?: 0
     operator fun set(index: Long, value: Long) {
@@ -28,7 +28,7 @@ class Intcode(program: List<Long>) {
     }
 
     fun run() {
-        while (isRunning) {
+        while (isRunning && !(isWaitingForInput && input.isEmpty())) {
             if (isWaitingForInput) {
                 input()
             } else {
@@ -108,7 +108,7 @@ class Intcode(program: List<Long>) {
     }
 
     private fun halt() {
-        isFinished = true
+        isRunning = false
     }
 
 }
@@ -190,7 +190,7 @@ class AsciiComputer(program: String, private val printOutput: Boolean = false) {
                 result = it
             }
         }
-        if (ic.isWaitingForInput) {
+        if (ic.isRunning) {
             writeOutput("> ")
         }
     }
