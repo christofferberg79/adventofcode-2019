@@ -46,10 +46,12 @@ private fun part1(program: String): Int {
 private fun part2(input: String): Long {
     val program = input.let { "2" + it.substring(1) }
     val ac = AsciiComputer(program)
-    ac.sendInput("A,B,A,C,B,C,B,A,C,B")
-    ac.sendInput("L,10,L,6,R,10")
-    ac.sendInput("R,6,R,8,R,8,L,6,R,8")
-    ac.sendInput("L,10,R,8,R,8,L,10")
-    ac.sendInput("n")
+    ac.sendInput("""
+        A,B,A,C,B,C,B,A,C,B
+        L,10,L,6,R,10
+        R,6,R,8,R,8,L,6,R,8
+        L,10,R,8,R,8,L,10
+        n
+    """.trimIndent())
     return ac.result
 }
