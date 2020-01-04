@@ -11,21 +11,49 @@ class Puzzle21 {
         val input = readInput("input21.txt")
         assertEquals(19361850, part1(input))
     }
+
+    @Test
+    fun testPart2() {
+        val input = readInput("input21.txt")
+        assertEquals(1138943788, part2(input))
+    }
 }
 
 private fun part1(program: String): Long {
     val ac = AsciiComputer(program)
 
-    // J := (NOT A OR NOT B OR NOT C) AND D
-    ac.sendInput("""
-        NOT A J
-        NOT B T
-        OR T J
-        NOT C T
-        OR T J
+    // J := NOT (A AND B AND C) AND D
+    ac.sendInput(
+        """
+        OR A J
+        AND B J
+        AND C J
+        NOT J J
         AND D J
         WALK
-    """.trimIndent())
+    """.trimIndent()
+    )
+
+    return ac.result
+}
+
+private fun part2(program: String): Long {
+    val ac = AsciiComputer(program)
+
+    // J := NOT (A AND B AND C) AND D AND H OR NOT A
+    ac.sendInput(
+        """
+        OR A J
+        AND B J
+        AND C J
+        NOT J J
+        AND D J
+        AND H J
+        NOT A T
+        OR T J
+        RUN
+    """.trimIndent()
+    )
 
     return ac.result
 }
