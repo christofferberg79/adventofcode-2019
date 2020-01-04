@@ -19,11 +19,9 @@ class Puzzle21 {
     }
 }
 
-private fun part1(program: String): Long {
-    val ac = AsciiComputer(program)
-
+private fun part1(program: String) = AsciiComputer(program).run {
     // J := NOT (A AND B AND C) AND D
-    ac.sendInput(
+    sendInput(
         """
         OR A J
         AND B J
@@ -31,17 +29,16 @@ private fun part1(program: String): Long {
         NOT J J
         AND D J
         WALK
-    """.trimIndent()
+        """.trimIndent()
     )
 
-    return ac.result
+    result
 }
 
-private fun part2(program: String): Long {
-    val ac = AsciiComputer(program)
+private fun part2(program: String) = AsciiComputer(program).run {
 
     // J := NOT (A AND B AND C) AND D AND H OR NOT A
-    ac.sendInput(
+    sendInput(
         """
         OR A J
         AND B J
@@ -52,8 +49,8 @@ private fun part2(program: String): Long {
         NOT A T
         OR T J
         RUN
-    """.trimIndent()
+        """.trimIndent()
     )
 
-    return ac.result
+    result
 }
