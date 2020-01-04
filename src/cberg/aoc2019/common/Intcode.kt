@@ -9,7 +9,7 @@ class Intcode(program: List<Long>) {
     private val pos = Position(this)
 
     private var isFinished = false
-    private var isWaitingForInput = false
+    var isWaitingForInput = false
     val isRunning: Boolean get() = !(isFinished || isWaitingForInput && input.isEmpty())
 
     operator fun get(index: Long) = program[index] ?: 0
@@ -152,3 +152,46 @@ private class Position(private val program: Intcode) {
 private fun Int.pow(n: Int) = generateSequence(1) { it * this }.elementAt(n)
 
 private fun parseProgram(s: String) = s.split(",").map(String::toLong)
+
+
+class AsciiComputer(program: String, private val printOutput: Boolean = false) {
+    private val ic = Intcode(program)
+    var result = 0L
+        private set
+
+    init {
+        run()
+    }
+
+    fun sendInput(input: String) {
+        writeOutputLine(input)
+        "$input\n".forEach { ic.sendInput(it.toLong()) }
+        run()
+    }
+
+    private fun writeOutputLine(message: Any?) {
+        if (printOutput) {
+            println(message)
+        }
+    }
+
+    private fun writeOutput(message: Any?) {
+        if (printOutput) {
+            print(message)
+        }
+    }
+
+    private fun run() {
+        ic.run()
+        ic.receiveOutput().forEach {
+            if (it in 0x00..0xFF) {
+                writeOutput(it.toChar())
+            } else {
+                result = it
+            }
+        }
+        if (ic.isWaitingForInput) {
+            writeOutput("> ")
+        }
+    }
+}

@@ -1,13 +1,10 @@
 package cberg.aoc2019
 
-import cberg.aoc2019.common.Coordinate
+import cberg.aoc2019.common.*
 import cberg.aoc2019.common.Coordinate.Companion.down
 import cberg.aoc2019.common.Coordinate.Companion.left
 import cberg.aoc2019.common.Coordinate.Companion.right
 import cberg.aoc2019.common.Coordinate.Companion.up
-import cberg.aoc2019.common.Intcode
-import cberg.aoc2019.common.plus
-import cberg.aoc2019.common.readInput
 import org.junit.Test
 import kotlin.test.assertEquals
 
@@ -46,21 +43,13 @@ private fun part1(program: String): Int {
         .map { (x, y) -> x * y }.sum()
 }
 
-private fun part2(program: String): Int {
-    val input = "A,B,A,C,B,C,B,A,C,B\n" +
-            "L,10,L,6,R,10\n" +
-            "R,6,R,8,R,8,L,6,R,8\n" +
-            "L,10,R,8,R,8,L,10\n" +
-            "n\n"
-
-    val ic = Intcode(program)
-    ic[0] = 2
-
-    input.forEach {
-        ic.sendInput(it.toLong())
-    }
-
-    ic.run()
-
-    return ic.receiveOutput().last().toInt()
+private fun part2(input: String): Long {
+    val program = input.let { "2" + it.substring(1) }
+    val ac = AsciiComputer(program)
+    ac.sendInput("A,B,A,C,B,C,B,A,C,B")
+    ac.sendInput("L,10,L,6,R,10")
+    ac.sendInput("R,6,R,8,R,8,L,6,R,8")
+    ac.sendInput("L,10,R,8,R,8,L,10")
+    ac.sendInput("n")
+    return ac.result
 }
