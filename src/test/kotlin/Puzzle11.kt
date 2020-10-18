@@ -44,10 +44,10 @@ private fun part2(input: String): List<String> {
 
     paint(grid, input)
 
-    val minX = grid.keys.map { it.x }.min() ?: error("Empty grid")
-    val minY = grid.keys.map { it.y }.min() ?: error("Empty grid")
-    val maxX = grid.keys.map { it.x }.max() ?: error("Empty grid")
-    val maxY = grid.keys.map { it.y }.max() ?: error("Empty grid")
+    val minX = grid.keys.map { it.x }.minOrNull() ?: error("Empty grid")
+    val minY = grid.keys.map { it.y }.minOrNull() ?: error("Empty grid")
+    val maxX = grid.keys.map { it.x }.maxOrNull() ?: error("Empty grid")
+    val maxY = grid.keys.map { it.y }.maxOrNull() ?: error("Empty grid")
 
     val output = mutableListOf<Char>()
     for (y in minY..maxY) {

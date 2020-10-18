@@ -17,7 +17,7 @@ class Intcode(program: List<Long>) {
         program[index] = value
     }
 
-    override fun toString() = (0..(program.keys.max() ?: -1)).map { get(it) }.joinToString(separator = ",")
+    override fun toString() = (0..(program.keys.maxOrNull() ?: -1)).map { get(it) }.joinToString(separator = ",")
 
     fun sendInput(value: Long) {
         input += value

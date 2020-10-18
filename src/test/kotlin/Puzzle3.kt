@@ -82,7 +82,7 @@ private fun part1(input1: String, input2: String): Int {
     }
         .filterNotNull()
         .map { it.manhattanDistance }
-        .min() ?: error("No soultion found")
+        .minOrNull() ?: error("No soultion found")
 }
 
 private fun part2(input1: String, input2: String): Int {

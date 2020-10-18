@@ -49,7 +49,7 @@ private class Droid(program: String) {
         }
         buildMap()
 
-        return map.values.filter { it.status == EMPTY }.map { it.stepsFromStart }.max() ?: error("No solution found")
+        return map.values.filter { it.status == EMPTY }.map { it.stepsFromStart }.maxOrNull() ?: error("No solution found")
     }
 
     private fun buildMap() {

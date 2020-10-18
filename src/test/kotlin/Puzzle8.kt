@@ -30,7 +30,7 @@ class Puzzle8 {
 
 private fun part1(input: String): Int {
     val layerWithFewestZeros = input.chunked(25 * 6)
-        .minBy { layer -> layer.count { pixel -> pixel == '0' } } ?: error("No layers found")
+        .minByOrNull { layer -> layer.count { pixel -> pixel == '0' } } ?: error("No layers found")
     return layerWithFewestZeros.run { count { it == '1' } * count { it == '2' } }
 }
 

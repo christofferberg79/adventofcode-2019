@@ -152,7 +152,7 @@ private class Space(asteroids: List<Coordinate>) {
 
     fun getMaxDetectedAsteroids() = asteroids
         .map { station -> asteroids.count { station.canDetect(it) } }
-        .max() ?: error("No solution found")
+        .maxOrNull() ?: error("No solution found")
 
     private fun Coordinate.canDetect(asteroid: Coordinate): Boolean {
         if (asteroid == this) return false
@@ -169,7 +169,7 @@ private class Space(asteroids: List<Coordinate>) {
     }
 
     fun getVaporizedAsteroid(n: Int): Coordinate {
-        val laser = asteroids.maxBy { station ->
+        val laser = asteroids.maxByOrNull { station ->
             asteroids.count { station.canDetect(it) }
         } ?: error("No solution found")
 

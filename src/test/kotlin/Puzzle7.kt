@@ -59,13 +59,13 @@ class Puzzle7 {
 private fun part1(input: String): Long {
     return getAllPhaseSettingSequences(0L..4L)
         .map { getThrusterSignal(input, it) }
-        .max() ?: error("No solution found")
+        .maxOrNull() ?: error("No solution found")
 }
 
 private fun part2(input: String): Long {
     return getAllPhaseSettingSequences(5L..9L)
         .map { getThrusterSignalWithFeedback(input, it) }
-        .max() ?: error("No solution found")
+        .maxOrNull() ?: error("No solution found")
 }
 
 private fun getAllPhaseSettingSequences(range: LongRange): List<List<Long>> {
