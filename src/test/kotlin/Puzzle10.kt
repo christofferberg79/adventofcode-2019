@@ -81,63 +81,36 @@ class Puzzle10 {
 
     @Test
     fun testPart1() {
-        run {
-            val asteroids = parseInput(example1)
-            val space = Space(asteroids)
-            assertEquals(8, space.getMaxDetectedAsteroids())
-        }
+        assertEquals(8, part1(example1))
+        assertEquals(33, part1(example2))
+        assertEquals(35, part1(example3))
+        assertEquals(41, part1(example4))
+        assertEquals(210, part1(example5))
 
-        run {
-            val asteroids = parseInput(example2)
-            val space = Space(asteroids)
-            assertEquals(33, space.getMaxDetectedAsteroids())
-        }
-
-        run {
-            val asteroids = parseInput(example3)
-            val space = Space(asteroids)
-            assertEquals(35, space.getMaxDetectedAsteroids())
-        }
-
-        run {
-            val asteroids = parseInput(example4)
-            val space = Space(asteroids)
-            assertEquals(41, space.getMaxDetectedAsteroids())
-        }
-
-        run {
-            val asteroids = parseInput(example5)
-            val space = Space(asteroids)
-            assertEquals(210, space.getMaxDetectedAsteroids())
-        }
-
-        run {
-            val inputLines = readInputLines("input10.txt")
-            val asteroids = parseInput(inputLines)
-            val space = Space(asteroids)
-            assertEquals(309, space.getMaxDetectedAsteroids())
-        }
+        val input = readInputLines("input10.txt")
+        assertEquals(309, part1(input))
     }
 
     @Test
     fun testPart2() {
-        run {
-            val asteroids = parseInput(example5)
-            val space = Space(asteroids)
-            assertEquals(802, part2(space))
-        }
+        assertEquals(802, part2(example5))
 
-        run {
-            val inputLines = readInputLines("input10.txt")
-            val asteroids = parseInput(inputLines)
-            val space = Space(asteroids)
-            assertEquals(416, part2(space))
-        }
+        val input = readInputLines("input10.txt")
+        assertEquals(416, part2(input))
     }
+}
 
-    private fun part2(space: Space): Int {
-        return space.getVaporizedAsteroid(200).let { (x, y) -> x * 100 + y }
-    }
+private fun part1(input: List<String>): Int {
+    return input.toSpace().getMaxDetectedAsteroids()
+}
+
+private fun part2(input: List<String>): Int {
+    return input.toSpace().getVaporizedAsteroid(200).let { (x, y) -> x * 100 + y }
+}
+
+private fun List<String>.toSpace(): Space {
+    val asteroids = parseInput(this)
+    return Space(asteroids)
 }
 
 private fun parseInput(input: List<String>) = input
