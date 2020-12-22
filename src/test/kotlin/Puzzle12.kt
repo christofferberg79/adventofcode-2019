@@ -100,30 +100,17 @@ private fun steps(x: Long, y: Long, z: Long): Long {
 }
 
 private fun Long.primeFactors(): Map<Long, Int> {
-    var num = this
-    val primeFactors = mutableListOf<Long>()
-    for (prime in Primes) {
-        while (num % prime == 0L) {
-            primeFactors += prime
-            num /= prime
+    var n = this
+    var d = 2L
+    val factors = mutableListOf<Long>()
+    while (n > 1) {
+        while (n % d == 0L) {
+            factors += d
+            n /= d
         }
-        if (num == 1L) {
-            break
-        }
+        d++
     }
-    return primeFactors.groupingBy { it }.eachCount()
-}
-
-object Primes : Iterable<Long> {
-    override fun iterator(): Iterator<Long> {
-        return object : Iterator<Long> {
-            private val generated = mutableListOf(2L)
-            override fun hasNext() = true
-            override fun next() = generated.last().also { generated += generateNext(it) }
-            private fun generateNext(last: Long) = generateSequence(last) { it + 1 }.first { it.isPrime() }
-            private fun Long.isPrime() = generated.none { this % it == 0L }
-        }
-    }
+    return factors.groupingBy { it }.eachCount()
 }
 
 private fun Long.pow(p: Int) = generateSequence(1L) { it * this }.elementAt(p)
@@ -163,7 +150,8 @@ private fun parseInput(input: List<String>) = input
     }
 
 private data class Moon(var position: Vec3, var velocity: Vec3) {
-    constructor(position: Vec3) : this(position,
+    constructor(position: Vec3) : this(
+        position,
         Vec3(0, 0, 0)
     )
 }
