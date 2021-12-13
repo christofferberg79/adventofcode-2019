@@ -1,15 +1,11 @@
 package cberg.aoc2019
 
-import cberg.aoc2019.common.Coordinate
+import cberg.aoc2019.Status.*
+import cberg.aoc2019.common.*
 import cberg.aoc2019.common.Coordinate.Companion.down
 import cberg.aoc2019.common.Coordinate.Companion.left
 import cberg.aoc2019.common.Coordinate.Companion.right
 import cberg.aoc2019.common.Coordinate.Companion.up
-import cberg.aoc2019.common.plus
-import cberg.aoc2019.common.unaryMinus
-import cberg.aoc2019.common.Intcode
-import cberg.aoc2019.Status.*
-import cberg.aoc2019.common.readInput
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -49,7 +45,7 @@ private class Droid(program: String) {
         }
         buildMap()
 
-        return map.values.filter { it.status == EMPTY }.map { it.stepsFromStart }.maxOrNull() ?: error("No solution found")
+        return map.values.filter { it.status == EMPTY }.maxOfOrNull { it.stepsFromStart } ?: error("No solution found")
     }
 
     private fun buildMap() {

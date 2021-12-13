@@ -40,18 +40,20 @@ private fun part1(program: String): Int {
     }
 
     return map.keys.filter { listOf(it, it + up, it + down, it + right, it + left).all { map[it] == '#' } }
-        .map { (x, y) -> x * y }.sum()
+        .sumOf { (x, y) -> x * y }
 }
 
 private fun part2(input: String): Long {
     val program = input.let { "2" + it.substring(1) }
     val ac = AsciiComputer(program)
-    ac.sendInput("""
+    ac.sendInput(
+        """
         A,B,A,C,B,C,B,A,C,B
         L,10,L,6,R,10
         R,6,R,8,R,8,L,6,R,8
         L,10,R,8,R,8,L,10
         n
-    """.trimIndent())
+    """.trimIndent()
+    )
     return ac.result
 }

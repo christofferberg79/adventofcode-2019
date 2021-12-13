@@ -1,12 +1,7 @@
 package cberg.aoc2019
 
-import cberg.aoc2019.common.Coordinate
+import cberg.aoc2019.common.*
 import cberg.aoc2019.common.Coordinate.Companion.up
-import cberg.aoc2019.common.plus
-import cberg.aoc2019.common.turnLeft
-import cberg.aoc2019.common.turnRight
-import cberg.aoc2019.common.Intcode
-import cberg.aoc2019.common.readInput
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -44,15 +39,15 @@ private fun part2(input: String): List<String> {
 
     paint(grid, input)
 
-    val minX = grid.keys.map { it.x }.minOrNull() ?: error("Empty grid")
-    val minY = grid.keys.map { it.y }.minOrNull() ?: error("Empty grid")
-    val maxX = grid.keys.map { it.x }.maxOrNull() ?: error("Empty grid")
-    val maxY = grid.keys.map { it.y }.maxOrNull() ?: error("Empty grid")
+    val minX = grid.keys.minOfOrNull { it.x } ?: error("Empty grid")
+    val minY = grid.keys.minOfOrNull { it.y } ?: error("Empty grid")
+    val maxX = grid.keys.maxOfOrNull { it.x } ?: error("Empty grid")
+    val maxY = grid.keys.maxOfOrNull { it.y } ?: error("Empty grid")
 
     val output = mutableListOf<Char>()
     for (y in minY..maxY) {
         for (x in minX..maxX) {
-            output += if (grid[Coordinate(x, y)] ?: 0L == 0L) ' ' else '#'
+            output += if ((grid[Coordinate(x, y)] ?: 0L) == 0L) ' ' else '#'
         }
     }
     return output.chunked(maxX - minX + 1).map { it.joinToString(separator = "") }

@@ -201,12 +201,12 @@ private fun getOresNeeded(reactions: Map<String, Reaction>, needed: Chemical): L
 }
 
 private fun parseReactions(input: List<String>) =
-    input.map { line ->
+    input.associate { line ->
         val (ingredientsStr, resultStr) = line.split(" => ")
         val result = resultStr.toChemical()
         val ingredients = ingredientsStr.split(", ").map { ingredient -> ingredient.toChemical() }
         result.name to Reaction(ingredients, result)
-    }.toMap()
+    }
 
 private data class Chemical(val amount: Long, val name: String)
 

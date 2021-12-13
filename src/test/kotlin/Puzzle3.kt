@@ -1,9 +1,9 @@
 package cberg.aoc2019
 
 import cberg.aoc2019.common.*
-import kotlin.test.Test
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Puzzle3 {
@@ -81,8 +81,8 @@ private fun part1(input1: String, input2: String): Int {
         }
     }
         .filterNotNull()
-        .map { it.manhattanDistance }
-        .minOrNull() ?: error("No soultion found")
+        .minOfOrNull { it.manhattanDistance }
+        ?: error("No soultion found")
 }
 
 private fun part2(input1: String, input2: String): Int {

@@ -79,5 +79,4 @@ private fun part2(input: List<String>): Int {
 
 private fun parseOrbits(input: List<String>) = input
     .map { it.split(")") }
-    .map { (a, b) -> b to a }
-    .toMap()
+    .associate { (a, b) -> b to a }

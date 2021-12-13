@@ -1,10 +1,6 @@
 package cberg.aoc2019
 
-import cberg.aoc2019.common.Coordinate
-import cberg.aoc2019.common.manhattanDistance
-import cberg.aoc2019.common.minus
-import cberg.aoc2019.common.quadrant
-import cberg.aoc2019.common.readInputLines
+import cberg.aoc2019.common.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -124,8 +120,8 @@ private class Space(asteroids: List<Coordinate>) {
     val asteroids = asteroids.toMutableList()
 
     fun getMaxDetectedAsteroids() = asteroids
-        .map { station -> asteroids.count { station.canDetect(it) } }
-        .maxOrNull() ?: error("No solution found")
+        .maxOfOrNull { station -> asteroids.count { station.canDetect(it) } }
+        ?: error("No solution found")
 
     private fun Coordinate.canDetect(asteroid: Coordinate): Boolean {
         if (asteroid == this) return false

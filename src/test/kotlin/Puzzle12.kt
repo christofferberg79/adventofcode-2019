@@ -1,9 +1,9 @@
 package cberg.aoc2019
 
 import cberg.aoc2019.common.readInputLines
-import kotlin.test.Test
 import kotlin.math.abs
 import kotlin.math.sign
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Puzzle12 {

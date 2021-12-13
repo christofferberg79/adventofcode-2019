@@ -58,14 +58,14 @@ class Puzzle7 {
 
 private fun part1(input: String): Long {
     return getAllPhaseSettingSequences(0L..4L)
-        .map { getThrusterSignal(input, it) }
-        .maxOrNull() ?: error("No solution found")
+        .maxOfOrNull { getThrusterSignal(input, it) }
+        ?: error("No solution found")
 }
 
 private fun part2(input: String): Long {
     return getAllPhaseSettingSequences(5L..9L)
-        .map { getThrusterSignalWithFeedback(input, it) }
-        .maxOrNull() ?: error("No solution found")
+        .maxOfOrNull { getThrusterSignalWithFeedback(input, it) }
+        ?: error("No solution found")
 }
 
 private fun getAllPhaseSettingSequences(range: LongRange): List<List<Long>> {
