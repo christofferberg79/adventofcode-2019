@@ -165,7 +165,7 @@ class AsciiComputer(program: String, private val printOutput: Boolean = false) {
 
     fun sendInput(input: String) {
         writeOutputLine(input.replace("\n", "\n> "))
-        "$input\n".forEach { ic.sendInput(it.toLong()) }
+        "$input\n".forEach { ic.sendInput(it.code.toLong()) }
         run()
     }
 
@@ -185,7 +185,7 @@ class AsciiComputer(program: String, private val printOutput: Boolean = false) {
         ic.run()
         ic.receiveOutput().forEach {
             if (it in 0x00..0xFF) {
-                writeOutput(it.toChar())
+                writeOutput(it.toInt().toChar())
             } else {
                 result = it
             }

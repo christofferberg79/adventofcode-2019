@@ -3,7 +3,7 @@ package cberg.aoc2019
 import cberg.aoc2019.common.Coordinate
 import cberg.aoc2019.common.Intcode
 import cberg.aoc2019.common.readInput
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Puzzle19 {

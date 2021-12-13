@@ -7,7 +7,7 @@ import cberg.aoc2019.common.turnLeft
 import cberg.aoc2019.common.turnRight
 import cberg.aoc2019.common.Intcode
 import cberg.aoc2019.common.readInput
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Puzzle11 {

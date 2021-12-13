@@ -1,7 +1,7 @@
 package cberg.aoc2019
 
 import cberg.aoc2019.common.*
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.test.assertEquals

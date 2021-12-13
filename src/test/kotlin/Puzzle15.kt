@@ -10,7 +10,7 @@ import cberg.aoc2019.common.unaryMinus
 import cberg.aoc2019.common.Intcode
 import cberg.aoc2019.Status.*
 import cberg.aoc2019.common.readInput
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Puzzle15 {

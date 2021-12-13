@@ -5,7 +5,7 @@ import cberg.aoc2019.common.Coordinate.Companion.down
 import cberg.aoc2019.common.Coordinate.Companion.left
 import cberg.aoc2019.common.Coordinate.Companion.right
 import cberg.aoc2019.common.Coordinate.Companion.up
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Puzzle17 {
@@ -34,7 +34,7 @@ private fun part1(program: String): Int {
             x = 0
             y++
         } else {
-            map[Coordinate(x, y)] = output.toChar()
+            map[Coordinate(x, y)] = output.toInt().toChar()
             x++
         }
     }

@@ -1,7 +1,7 @@
 package cberg.aoc2019
 
 import cberg.aoc2019.common.readInputLines
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Puzzle6 {
@@ -67,7 +67,7 @@ private fun part1(input: List<String>): Int {
         orbits[o]?.let { getNumberOfOrbits(it) + 1 } ?: error("Unknown object: $o")
     }
 
-    return orbits.keys.sumBy { getNumberOfOrbits(it) }
+    return orbits.keys.sumOf { getNumberOfOrbits(it) }
 }
 
 private fun part2(input: List<String>): Int {

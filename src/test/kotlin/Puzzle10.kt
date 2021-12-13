@@ -5,7 +5,7 @@ import cberg.aoc2019.common.manhattanDistance
 import cberg.aoc2019.common.minus
 import cberg.aoc2019.common.quadrant
 import cberg.aoc2019.common.readInputLines
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Puzzle10 {

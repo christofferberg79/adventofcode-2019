@@ -1,6 +1,6 @@
 package cberg.aoc2019
 
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Puzzle4 {
@@ -25,5 +25,5 @@ private fun part2(input: IntRange) = input.count { value ->
     with(value.digits) { isSorted() && groupingBy { it }.eachCount().any { it.value == 2 } }
 }
 
-private val Int.digits get() = toString().toCharArray().map { it.toInt() }
+private val Int.digits get() = toString().toCharArray().map { it.code }
 private fun <T : Comparable<T>> Iterable<T>.isSorted() = zipWithNext().all { (i1, i2) -> i1 <= i2 }

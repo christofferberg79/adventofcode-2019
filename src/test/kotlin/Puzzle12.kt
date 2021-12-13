@@ -1,7 +1,7 @@
 package cberg.aoc2019
 
 import cberg.aoc2019.common.readInputLines
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.math.abs
 import kotlin.math.sign
 import kotlin.test.assertEquals
@@ -59,7 +59,7 @@ private fun part1(input: List<String>, steps: Int): Int {
     repeat(steps) {
         step(moons)
     }
-    return moons.sumBy { it.energy }
+    return moons.sumOf { it.energy }
 }
 
 private fun part2(input: List<String>): Long {

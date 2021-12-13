@@ -2,7 +2,7 @@ package cberg.aoc2019
 
 import cberg.aoc2019.common.AsciiComputer
 import cberg.aoc2019.common.readInput
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Puzzle21 {

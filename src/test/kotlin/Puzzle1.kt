@@ -1,7 +1,7 @@
 package cberg.aoc2019
 
 import cberg.aoc2019.common.readInputLines
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class Puzzle1 {
@@ -23,9 +23,9 @@ class Puzzle1 {
     }
 }
 
-private fun part1(input: List<Int>) = input.sumBy { mass -> mass / 3 - 2 }
+private fun part1(input: List<Int>) = input.sumOf { mass -> mass / 3 - 2 }
 
-private fun part2(input: List<Int>) = input.sumBy { mass ->
+private fun part2(input: List<Int>) = input.sumOf { mass ->
     generateSequence(mass) { additionalMass -> additionalMass / 3 - 2 }
         .drop(1)
         .takeWhile { fuel -> fuel > 0 }
